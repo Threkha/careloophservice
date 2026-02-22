@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careloop - Pharma & Home Checkup</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    color: #333;
+}
+header {
+    background: rgba(255,255,255,0.95);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+nav a {
+    text-decoration: none;
+    color: #667eea;
+    font-weight: bold;
+}
+section {
+    padding: 3rem 2rem;
+    text-align: center;
+}
+h1,h2 {
+    color: white;
+}
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.service-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    cursor: pointer;
+}
+form {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: auto;
+}
+input,select,textarea {
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+button {
+    background: #667eea;
+    color: white;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+footer {
+    background: black;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<div><strong>Careloop</strong></div>
+<ul>
+<li><a href="#home" id="navHome">Home</a></li>
+<li><a href="#services" id="navServices">Services</a></li>
+<li><a href="#contact" id="navContact">Contact</a></li>
+<li><a href="#book" id="navBook">Book Appointment</a></li>
+<li>
+<select onchange="changeLanguage(this.value)">
+<option value="en">English</option>
+<option value="ja">日本語</option>
+</select>
+</li>
+</ul>
+</nav>
+</header>
+
+<section id="home">
+<h1 id="welcome">Welcome to Careloop</h1>
+<p id="tagline">Your Pharma & Home Checkup partner for doorstep convenience.</p>
+</section>
+
+<section id="services">
+<h2 id="serviceTitle">Our Services</h2>
+<div class="services">
+
+<div class="service-card">
+<h3 id="doorstepTitle">Doorstep Visit</h3>
+<p id="doorstepDesc">Doctor & pharmacy support at your home.</p>
+</div>
+
+<div class="service-card">
+<h3 id="doctorTitle">Doctor Appointment</h3>
+<p id="doctorDesc">Consult specialist doctors anytime.</p>
+</div>
+
+<div class="service-card">
+<h3 id="physioTitle">Physiotherapy</h3>
+<p id="physioDesc">Professional recovery sessions at home.</p>
+</div>
+
+</div>
+</section>
+
+<section id="contact">
+<h2 id="contactTitle">Contact Us</h2>
+<p id="contactText">Phone: 8838397429 | Email: careloop2026@gmail.com</p>
+</section>
+
+<section id="book">
+<h2 id="bookingTitle">General Booking</h2>
+<form id="patientForm">
+<input type="text" id="name" placeholder="Patient Name" required>
+<input type="tel" id="phone" placeholder="Phone Number" required>
+<input type="text" id="address" placeholder="Address" required>
+<input type="number" id="age" placeholder="Age" required>
+
+<select id="gender" required>
+<option value="">Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+
+<textarea id="message" placeholder="Additional Details"></textarea>
+<button id="submitBtn">Submit Appointment</button>
+</form>
+<div id="response"></div>
+</section>
+
+<footer>
+<p id="footerText">© 2026 Careloop - Pharma & Home Checkup. All rights reserved.</p>
+</footer>
+
+<script>
+
+const translations = {
+
+en:{
+nav:["Home","Services","Contact","Book Appointment"],
+welcome:"Welcome to Careloop",
+tagline:"Your Pharma & Home Checkup partner for doorstep convenience.",
+serviceTitle:"Our Services",
+doorstepTitle:"Doorstep Visit",
+doorstepDesc:"Doctor & pharmacy support at your home.",
+doctorTitle:"Doctor Appointment",
+doctorDesc:"Consult specialist doctors anytime.",
+physioTitle:"Physiotherapy",
+physioDesc:"Professional recovery sessions at home.",
+contactTitle:"Contact Us",
+contactText:"Phone: 8838397429 | Email: careloop2026@gmail.com",
+bookingTitle:"General Booking",
+placeholders:["Patient Name","Phone Number","Address","Age","Additional Details"],
+gender:["Gender","Male","Female","Other"],
+submit:"Submit Appointment",
+footer:"© 2026 Careloop - Pharma & Home Checkup. All rights reserved.",
+success:(n,p)=>`Thank you, ${n}! We'll call on ${p}.`
+},
+
+ja:{
+nav:["ホーム","サービス","お問い合わせ","予約"],
+welcome:"Careloopへようこそ",
+tagline:"ご自宅での薬局・健康チェックサービス。",
+serviceTitle:"サービス内容",
+doorstepTitle:"訪問診療",
+doorstepDesc:"医師と薬局サポートをご自宅へ。",
+doctorTitle:"医師予約",
+doctorDesc:"専門医にいつでも相談可能。",
+physioTitle:"理学療法",
+physioDesc:"自宅での回復セッション。",
+contactTitle:"お問い合わせ",
+contactText:"電話: 8838397429 | メール: careloop2026@gmail.com",
+bookingTitle:"一般予約",
+placeholders:["患者名","電話番号","住所","年齢","追加詳細"],
+gender:["性別","男性","女性","その他"],
+submit:"予約を送信",
+footer:"© 2026 Careloop - 薬局＆訪問健康チェックサービス。",
+success:(n,p)=>`ありがとうございます ${n}様。${p} にご連絡いたします。`
+}
+
+};
+
+function changeLanguage(lang){
+
+document.documentElement.lang=lang;
+
+document.getElementById("navHome").textContent=translations[lang].nav[0];
+document.getElementById("navServices").textContent=translations[lang].nav[1];
+document.getElementById("navContact").textContent=translations[lang].nav[2];
+document.getElementById("navBook").textContent=translations[lang].nav[3];
+
+document.getElementById("welcome").textContent=translations[lang].welcome;
+document.getElementById("tagline").textContent=translations[lang].tagline;
+document.getElementById("serviceTitle").textContent=translations[lang].serviceTitle;
+document.getElementById("doorstepTitle").textContent=translations[lang].doorstepTitle;
+document.getElementById("doorstepDesc").textContent=translations[lang].doorstepDesc;
+document.getElementById("doctorTitle").textContent=translations[lang].doctorTitle;
+document.getElementById("doctorDesc").textContent=translations[lang].doctorDesc;
+document.getElementById("physioTitle").textContent=translations[lang].physioTitle;
+document.getElementById("physioDesc").textContent=translations[lang].physioDesc;
+document.getElementById("contactTitle").textContent=translations[lang].contactTitle;
+document.getElementById("contactText").textContent=translations[lang].contactText;
+document.getElementById("bookingTitle").textContent=translations[lang].bookingTitle;
+document.getElementById("submitBtn").textContent=translations[lang].submit;
+document.getElementById("footerText").textContent=translations[lang].footer;
+
+const inputs=["name","phone","address","age","message"];
+inputs.forEach((id,i)=>{
+document.getElementById(id).placeholder=translations[lang].placeholders[i];
+});
+
+const genderSelect=document.getElementById("gender");
+genderSelect.innerHTML="";
+translations[lang].gender.forEach((g,i)=>{
+let opt=document.createElement("option");
+opt.value=i===0?"":g;
+opt.textContent=g;
+genderSelect.appendChild(opt);
+});
+}
+
+document.getElementById("patientForm").addEventListener("submit",function(e){
+e.preventDefault();
+let lang=document.querySelector("select").value;
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+
+document.getElementById("response").innerHTML=
+`<p style="background:#d4edda;padding:1rem;">
+${translations[lang].success(name,phone)}
+</p>`;
+this.reset();
+});
+
+</script>
+
+</body>
+</html>
